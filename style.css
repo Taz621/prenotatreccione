@@ -44,16 +44,36 @@ h1 {
     margin-bottom: 0.5rem;
 }
 
-/* Auth Page */
+/* Auth Page Logic */
+.form-view {
+    display: none; /* Nascondi entrambe le viste di default */
+}
+
+.form-view.active {
+    display: block; /* Mostra solo quella attiva */
+}
+
 .auth-container p {
     color: #6c757d;
     margin-bottom: 2rem;
 }
 
-.form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+.toggle-link {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.toggle-link a {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+#show-signup {
+    color: var(--error-color); /* Link "Registrati" in rosso */
+}
+
+#show-login {
+    color: var(--primary-color);
 }
 
 form {
@@ -88,7 +108,7 @@ button {
     transition: background-color 0.3s;
 }
 
-button:hover {
+button.btn-primary:hover {
     background-color: #52b788;
 }
 
@@ -195,7 +215,7 @@ main {
 
 #calendar {
     width: 100%;
-    max-width: 400px; /* Adatto per mobile */
+    max-width: 400px;
     border: 1px solid var(--secondary-color);
     border-radius: var(--border-radius);
     padding: 1rem;
