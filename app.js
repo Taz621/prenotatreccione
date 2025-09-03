@@ -70,10 +70,15 @@ signupForm.addEventListener('submit', async (event) => {
         errorMessage.textContent = 'Errore. L\'email potrebbe essere già in uso o la password è troppo corta.';
         console.error('Signup Error:', error.message);
     } else {
-        //alert('Registrazione completata! Controlla la tua email per confermare l\'account e poter accedere.');
-        // Riporta l'utente alla vista di login
-        signupView.classList.remove('active');
-        loginView.classList.add('active');
+        // Se l'utente è stato creato correttamente ed è loggato
+    console.log('Registrazione completata:', user);
+
+    // Salva la sessione in localStorage (utile per mantenere il login)
+    localStorage.setItem('supabase.auth.token', JSON.stringify(session));
+
+    // Reindirizza subito alla home
+    window.location.href = '/home/panoramica.html';
     }
 });
+
 
