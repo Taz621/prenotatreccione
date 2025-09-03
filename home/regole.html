@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regole della Casa</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container main-container">
+        <nav>
+            <a href="panoramica.html">Panoramica</a>
+            <a href="prenota.html">Prenota</a>
+            <a href="regole.html" class="active">Regole</a>
+            <button class="logout-btn">Esci</button>
+        </nav>
+        <main>
+            <h2>Regole della Casa</h2>
+            <p>Coming soon...</p>
+        </main>
+    </div>
+    <script type="module">
+        import supabase from '../config.js';
+        
+        // Logica di base per il logout e il controllo sessione
+        document.querySelector('.logout-btn').addEventListener('click', async () => {
+            await supabase.auth.signOut();
+            window.location.href = '../index.html';
+        });
+
+        const checkSession = async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                window.location.href = '../index.html';
+            } else if (session.user.email === 'admin@admin.it') {
+                 const prenotaLink = document.querySelector('a[href="prenota.html"]');
+                 if (prenotaLink) prenotaLink.style.display = 'none';
+            }
+        };
+        checkSession();
+    </script>
+</body>
+</html>

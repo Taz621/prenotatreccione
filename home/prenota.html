@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prenota il tuo Soggiorno</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container main-container">
+        <nav>
+            <a href="panoramica.html">Panoramica</a>
+            <a href="prenota.html" class="active">Prenota</a>
+            <a href="regole.html">Regole</a>
+            <button class="logout-btn">Esci</button>
+        </nav>
+        <main>
+            <h2>Seleziona le date</h2>
+            <div class="calendar-container">
+                <div class="calendar-nav">
+                    <button id="prevMonth">←</button>
+                    <div class="month">
+                        <h3 id="month-year"></h3>
+                    </div>
+                    <button id="nextMonth">→</button>
+                </div>
+                <div class="days weekdays">
+                    <div class="weekday">Lun</div>
+                    <div class="weekday">Mar</div>
+                    <div class="weekday">Mer</div>
+                    <div class="weekday">Gio</div>
+                    <div class="weekday">Ven</div>
+                    <div class="weekday">Sab</div>
+                    <div class="weekday">Dom</div>
+                </div>
+                <div id="calendar-days" class="days"></div>
+                <div class="booking-action">
+                    <button id="book-btn" disabled>Seleziona un intervallo</button>
+                    <p id="selection-info"></p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script type="module" src="prenota.js"></script>
+</body>
+</html>
