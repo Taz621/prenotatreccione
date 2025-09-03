@@ -12,23 +12,27 @@
 <body>
     <div class="container auth-container">
         <h1>BaitaShare 🏔️</h1>
-        <p>Accedi o registrati per prenotare il tuo soggiorno.</p>
-
-        <div class="form-container">
+        
+        <div id="login-view" class="form-view active">
+            <p>Accedi per prenotare il tuo soggiorno.</p>
             <form id="login-form">
-                <h2>Accedi</h2>
                 <input type="email" id="login-email" placeholder="Email" required>
                 <input type="password" id="login-password" placeholder="Password" required>
-                <button type="submit">Entra</button>
+                <button type="submit" class="btn-primary">Accedi</button>
             </form>
+            <p class="toggle-link">Sei nuovo? <a href="#" id="show-signup">Registrati qui</a></p>
+        </div>
 
+        <div id="signup-view" class="form-view">
+            <p>Crea un nuovo account per iniziare.</p>
             <form id="signup-form">
-                <h2>Nuovo utente? Registrati</h2>
                 <input type="email" id="signup-email" placeholder="Email" required>
                 <input type="password" id="signup-password" placeholder="Password (min. 6 caratteri)" required>
-                <button type="submit">Registrati</button>
+                <button type="submit" class="btn-primary">Registrati</button>
             </form>
+            <p class="toggle-link">Hai già un account? <a href="#" id="show-login">Accedi</a></p>
         </div>
+
         <p id="error-message" class="error"></p>
     </div>
 
