@@ -67,18 +67,15 @@ signupForm.addEventListener('submit', async (event) => {
     const { error } = await supabase.auth.signUp({ email, password });
 
     if (error) {
-        errorMessage.textContent = 'Errore. L\'email potrebbe essere già in uso o la password è troppo corta.';
+        errorMessage.textContent = 'Errore durante la registrazione. L\'email potrebbe essere già in uso.';
         console.error('Signup Error:', error.message);
     } else {
-        // Se l'utente è stato creato correttamente ed è loggato
-    console.log('Registrazione completata:', user);
-
-    // Salva la sessione in localStorage (utile per mantenere il login)
-    localStorage.setItem('supabase.auth.token', JSON.stringify(session));
-
-    // Reindirizza subito alla home
-    window.location.href = '/home/panoramica.html';
+        alert('Registrazione completata! Ora puoi effettuare il login.');
+        // Riporta l'utente alla vista di login
+        signupView.classList.remove('active');
+        loginView.classList.add('active');
     }
 });
+
 
 
