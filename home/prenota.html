@@ -15,7 +15,7 @@
             <a href="panoramica.html">Panoramica</a>
             <a href="prenota.html" class="active">Prenota</a>
             <a href="regole.html">Regole</a>
-            <button class="logout-btn">Esci</button>
+            <button id="theme-toggle" class="theme-toggle">🌙</button>
         </nav>
         <main>
             <h2>Seleziona le date</h2>
@@ -28,12 +28,8 @@
                     <button id="nextMonth">→</button>
                 </div>
                 <div class="days weekdays">
-                    <div class="weekday">Lun</div>
-                    <div class="weekday">Mar</div>
-                    <div class="weekday">Mer</div>
-                    <div class="weekday">Gio</div>
-                    <div class="weekday">Ven</div>
-                    <div class="weekday">Sab</div>
+                    <div class="weekday">Lun</div><div class="weekday">Mar</div><div class="weekday">Mer</div>
+                    <div class="weekday">Gio</div><div class="weekday">Ven</div><div class="weekday">Sab</div>
                     <div class="weekday">Dom</div>
                 </div>
                 <div id="calendar-days" class="days"></div>
@@ -45,5 +41,5 @@
         </main>
     </div>
     <script type="module" src="prenota.js"></script>
-</body>
+    <script type="module" src="shared.js"></script> </body>
 </html>
