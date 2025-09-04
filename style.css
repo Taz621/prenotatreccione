@@ -202,3 +202,29 @@ main {
     nav a { padding: 0.5rem; font-size: 0.9rem; /* Testo più piccolo su mobile */}
     .theme-toggle { font-size: 1.3rem; right: 10px; }
 }
+/* Stili per il Logo (da aggiungere in fondo a style.css) */
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 1rem; /* Spazio tra logo e navigazione */
+}
+
+.logo {
+    max-width: 250px; /* Imposta la larghezza massima del logo */
+    height: auto;
+}
+
+/* Logica per mostrare/nascondere i loghi */
+.logo-dark {
+    display: none; /* Il logo scuro è nascosto di default */
+}
+
+body.dark-mode .logo-dark {
+    display: inline-block; /* Mostra il logo scuro in dark mode */
+}
+
+body.dark-mode .logo-light {
+    display: none; /* Nascondi il logo chiaro in dark mode */
+}
+
+
