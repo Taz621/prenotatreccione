@@ -1,27 +1,24 @@
 // home/shared.js
 
-// Seleziona gli elementi necessari
 const themeToggleButton = document.getElementById('theme-toggle');
-const body = document.body;
+const docElement = document.documentElement; // Usiamo l'elemento <html>
 
-// Funzione per applicare il tema in base a localStorage
-const applyTheme = () => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        body.classList.add('dark-mode');
-        themeToggleButton.textContent = '☀️'; // Cambia in icona sole
+// Funzione per aggiornare l'icona del pulsante al caricamento
+const updateButtonIcon = () => {
+    if (docElement.classList.contains('dark-mode')) {
+        themeToggleButton.textContent = '☀️';
     } else {
-        body.classList.remove('dark-mode');
-        themeToggleButton.textContent = '🌙'; // Cambia in icona luna
+        themeToggleButton.textContent = '🌙';
     }
 };
 
 // Aggiungi l'evento al click del pulsante
 themeToggleButton.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
+    // Alterna la classe dark-mode
+    docElement.classList.toggle('dark-mode');
 
-    // Salva la preferenza e aggiorna l'icona
-    if (body.classList.contains('dark-mode')) {
+    // Salva la nuova preferenza e aggiorna l'icona
+    if (docElement.classList.contains('dark-mode')) {
         localStorage.setItem('theme', 'dark');
         themeToggleButton.textContent = '☀️';
     } else {
@@ -30,5 +27,5 @@ themeToggleButton.addEventListener('click', () => {
     }
 });
 
-// Applica il tema al caricamento della pagina
-document.addEventListener('DOMContentLoaded', applyTheme);
+// Aggiorna l'icona non appena il DOM è pronto
+document.addEventListener('DOMContentLoaded', updateButtonIcon);
