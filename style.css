@@ -67,9 +67,21 @@ nav a:hover { background-color: var(--secondary-color); }
 
 /* Correzione #2: L'icona ora è gestita dal CSS per essere istantanea */
 .theme-toggle {
-    position: fixed; top: 15px; left: 15px; transform: translateY(-50%);
-    background: none; border: none; color: var(--text-color); cursor: pointer;
-    font-size: 1.5rem; padding: 0; line-height: 1;
+   position: fixed; /* Cambiato da absolute a fixed per posizionamento rispetto alla finestra */
+    top: 15px; /* Distanza dal bordo superiore */
+    left: 15px; /* Distanza dal bordo sinistro */
+    background: none; 
+    border: none; 
+    color: var(--text-color); 
+    cursor: pointer;
+    font-size: 1.5rem; 
+    padding: 0; 
+    line-height: 1;
+    z-index: 1000; /* Assicura che rimanga sopra altri elementi */
+    transition: transform 0.2s ease; /* Aggiunge una piccola animazione */
+}
+.theme-toggle:hover {
+    transform: scale(1.1); /* Piccolo ingrandimento al hover */
 }
 .theme-toggle::before {
     content: '🌙'; /* Icona di default (tema chiaro) */
@@ -129,6 +141,7 @@ html.dark-mode .logo-light { display: none; }
     h1 { font-size: 2rem; } nav a { padding: 0.5rem; font-size: 0.9rem; }
     .theme-toggle { font-size: 1.3rem; right: 10px; left: 10px;}
 }
+
 
 
 
