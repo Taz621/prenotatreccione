@@ -142,6 +142,28 @@ html.dark-mode .logo-light { display: none; }
     .theme-toggle { font-size: 1.3rem; right: 10px; left: 10px;}
 }
 
+/* Stile per il pulsante Esci nell'angolo (da aggiungere in fondo a style.css) */
+.logout-btn-corner {
+    position: fixed; /* Rimane fisso anche scorrendo */
+    top: 15px;
+    right: 15px;
+    background-color: var(--error-color); /* Colore rosso */
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 1000; /* Assicura che sia sempre in primo piano */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.2s;
+}
+
+.logout-btn-corner:hover {
+    background-color: #d00000; /* Un rosso più scuro al passaggio del mouse */
+}
+
+
 
 
 
