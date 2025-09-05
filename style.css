@@ -22,12 +22,12 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-/*.container {
+.container {
     width: 100%; max-width: 500px; padding: 2rem; background-color: var(--card-bg);
     border-radius: var(--border-radius); box-shadow: var(--box-shadow); text-align: center;
     transition: background-color 0.3s;
 }
-*/
+
 h1, h2 { color: var(--primary-color); }
 h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
 
@@ -50,11 +50,13 @@ button.btn-primary:hover { background-color: #52b788; } .error { color: var(--er
 
 /* Main App Layout */
 .main-container { max-width: 1200px; height: 95vh; display: flex; flex-direction: column; }
-nav {
+/*nav {
     display: flex; justify-content: space-around; align-items: center; background-color: var(--card-bg);
     padding: 0.5rem 1rem; border-radius: var(--border-radius); box-shadow: var(--box-shadow);
     margin-bottom: 1.5rem; position: relative; transition: background-color 0.3s;
-}
+} 
+*/
+
 nav a {
     text-decoration: none; color: var(--text-color); font-weight: 600; padding: 0.5rem 1rem;
     border-radius: 8px; transition: background-color 0.3s, color 0.3s; font-size: 1rem;
@@ -127,6 +129,7 @@ html.dark-mode .logo-light { display: none; }
     h1 { font-size: 2rem; } nav a { padding: 0.5rem; font-size: 0.9rem; }
     .theme-toggle { font-size: 1.3rem; right: 10px; }
 }
+
 
 
 
