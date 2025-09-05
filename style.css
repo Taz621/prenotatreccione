@@ -49,11 +49,11 @@ button.btn-primary:hover { background-color: #52b788; } .error { color: var(--er
 
 /* Main App Layout */
 .main-container { max-width: 1200px; height: 95vh; display: flex; flex-direction: column; }
-/*nav {
+nav {
     display: flex; justify-content: space-around; align-items: center; background-color: var(--card-bg);
     padding: 0.5rem 1rem; border-radius: var(--border-radius); box-shadow: var(--box-shadow);
     margin-bottom: 1.5rem; position: relative; transition: background-color 0.3s;
-}*/
+}
 nav a {
     text-decoration: none; color: var(--text-color); font-weight: 600; padding: 0.5rem 1rem;
     border-radius: 8px; transition: background-color 0.3s, color 0.3s; font-size: 1rem;
@@ -147,4 +147,5 @@ html.dark-mode .logo-light { display: none; }
         left: 10px; /* Lascia solo 'left' per posizionarlo a sinistra */
     }
 }
+
 
