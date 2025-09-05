@@ -7,7 +7,6 @@
     --booked-user: #ffdd00; --border-radius: 15px; --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* Correzione #1: La classe .dark-mode viene applicata a <html>, non a <body> */
 html.dark-mode {
     /* Tema Scuro */
     --bg-color: #212529; --card-bg: #343a40; --text-color: #f8f9fa;
@@ -52,11 +51,9 @@ button.btn-primary:hover { background-color: #52b788; } .error { color: var(--er
 .main-container { max-width: 1200px; height: 95vh; display: flex; flex-direction: column; }
 nav {
     display: flex; justify-content: space-around; align-items: center; background-color: var(--card-bg);
-    padding: 0rem 0rem; border-radius: var(--border-radius); box-shadow: var(--box-shadow);
+    padding: 0.5rem 1rem; border-radius: var(--border-radius); box-shadow: var(--box-shadow);
     margin-bottom: 1.5rem; position: relative; transition: background-color 0.3s;
-} 
-
-
+}
 nav a {
     text-decoration: none; color: var(--text-color); font-weight: 600; padding: 0.5rem 1rem;
     border-radius: 8px; transition: background-color 0.3s, color 0.3s; font-size: 1rem;
@@ -65,23 +62,14 @@ nav a {
 nav a.active { background-color: var(--secondary-color); color: var(--primary-color); }
 nav a:hover { background-color: var(--secondary-color); }
 
-/* Correzione #2: L'icona ora è gestita dal CSS per essere istantanea */
+/* Stile per il pulsante del tema, ora posizionato a SINISTRA */
 .theme-toggle {
-   position: fixed; /* Cambiato da absolute a fixed per posizionamento rispetto alla finestra */
-    top: 15px; /* Distanza dal bordo superiore */
-    left: 15px; /* Distanza dal bordo sinistro */
-    background: none; 
-    border: none; 
-    color: var(--text-color); 
-    cursor: pointer;
-    font-size: 1.5rem; 
-    padding: 0; 
-    line-height: 1;
-    z-index: 1000; /* Assicura che rimanga sopra altri elementi */
-    transition: transform 0.2s ease; /* Aggiunge una piccola animazione */
-}
-.theme-toggle:hover {
-    transform: scale(1.1); /* Piccolo ingrandimento al hover */
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: none; border: none; color: var(--text-color);
+    cursor: pointer; font-size: 1.5rem; padding: 0;
+    line-height: 1; z-index: 1000;
 }
 .theme-toggle::before {
     content: '🌙'; /* Icona di default (tema chiaro) */
@@ -129,47 +117,33 @@ main {
 #book-btn { width: 100%; max-width: 300px; }
 
 /* Stili per il Logo */
-.logo-container { text-align: center; margin-bottom: 0rem;}
+.logo-container { text-align: center; margin-bottom: 0; }
 .logo { max-width: 250px; height: auto; }
 .logo-dark { display: none; }
 html.dark-mode .logo-dark { display: inline-block; }
 html.dark-mode .logo-light { display: none; }
 
+/* Stile per il pulsante Esci nell'angolo */
+.logout-btn-corner {
+    position: fixed; top: 15px; right: 15px;
+    background-color: var(--error-color); color: white;
+    padding: 0.5rem 1rem; border: none; border-radius: 8px;
+    font-weight: 600; cursor: pointer; z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.2s;
+}
+.logout-btn-corner:hover {
+    background-color: #d00000;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
     body { padding: 0.5rem; } .container, .main-container { padding: 1rem; }
     h1 { font-size: 2rem; } nav a { padding: 0.5rem; font-size: 0.9rem; }
-    .theme-toggle { font-size: 1.3rem; right: 10px; left: 10px;}
+    
+    /* Correzione: Rimuovi 'right' per evitare che il pulsante si "stiri" su mobile */
+    .theme-toggle {
+        font-size: 1.3rem;
+        left: 10px; /* Lascia solo 'left' per posizionarlo a sinistra */
+    }
 }
-
-/* Stile per il pulsante Esci nell'angolo (da aggiungere in fondo a style.css) */
-.logout-btn-corner {
-    position: fixed; /* Rimane fisso anche scorrendo */
-    top: 15px;
-    right: 15px;
-    background-color: var(--error-color); /* Colore rosso */
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    z-index: 1000; /* Assicura che sia sempre in primo piano */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    transition: background-color 0.2s;
-}
-
-.logout-btn-corner:hover {
-    background-color: #d00000; /* Un rosso più scuro al passaggio del mouse */
-}
-
-
-
-
-
-
-
-
-
-
-
