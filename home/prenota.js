@@ -1,7 +1,6 @@
 // home/prenota.js
 import supabase from '../config.js';
 
-// ... (tutte le variabili e le funzioni del calendario rimangono invariate) ...
 const monthYearEl = document.getElementById('month-year');
 const calendarDaysEl = document.getElementById('calendar-days');
 const prevMonthBtn = document.getElementById('prevMonth');
@@ -13,12 +12,14 @@ let startDate = null;
 let endDate = null;
 let bookings = [];
 let currentUser = null;
+
 const fetchBookings = async () => {
     const { data, error } = await supabase.from('bookings').select('user_id, start_date, end_date');
     if (error) { console.error('Error fetching bookings', error); return; }
     bookings = data;
     renderCalendar();
 };
+
 const renderCalendar = () => {
     calendarDaysEl.innerHTML = '';
     const month = currentDate.getMonth();
@@ -50,16 +51,19 @@ const renderCalendar = () => {
     }
     updateSelectionUI();
 };
+
 const isDateBooked = (date) => {
     for (const booking of bookings) {
-        const start = new Date(booking.start_date);
-        const end = new Date(booking.end_date);
+        // Aggiungiamo 'T00:00:00' per evitare problemi di fuso orario nella lettura
+        const start = new Date(booking.start_date + 'T00:00:00');
+        const end = new Date(booking.end_date + 'T00:00:00');
         if (date >= start && date <= end) {
             return { status: true, isOwner: booking.user_id === currentUser.id };
         }
     }
     return { status: false, isOwner: false };
 };
+
 const handleDateClick = (date) => {
     if (date < new Date().setHours(0,0,0,0)) return;
     if (!startDate || (startDate && endDate)) {
@@ -78,6 +82,7 @@ const handleDateClick = (date) => {
     }
     updateSelectionUI();
 };
+
 const updateSelectionUI = () => {
     document.querySelectorAll('.day').forEach(dayEl => {
         dayEl.classList.remove('selected', 'in-range', 'range-start', 'range-end');
@@ -101,26 +106,38 @@ const updateSelectionUI = () => {
         selectionInfo.textContent = startDate ? `Giorno di arrivo: ${startDate.toLocaleDateString('it-IT')}` : '';
     }
 };
+
 prevMonthBtn.addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); });
 nextMonthBtn.addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); });
+
 bookBtn.addEventListener('click', async () => {
     if (!startDate || !endDate || !currentUser) return;
-    const formatForSupabase = (date) => date.toISOString().split('T')[0];
+
+    // --- QUESTA È LA FUNZIONE CORRETTA ---
+    // Formatta la data manualmente per ignorare il fuso orario.
+    const formatForSupabase = (date) => {
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
     const { error } = await supabase.from('bookings').insert({
         user_id: currentUser.id, user_email: currentUser.email,
-        start_date: formatForSupabase(startDate), end_date: formatForSupabase(endDate)
+        start_date: formatForSupabase(startDate),
+        end_date: formatForSupabase(endDate)
     });
+
     if (error) {
         alert('Errore durante la prenotazione: ' + error.message);
         console.error('Booking error:', error);
     } else {
         alert('Prenotazione effettuata con successo!');
-        startDate = null; endDate = null; fetchBookings();
+        startDate = null; endDate = null;
+        fetchBookings();
     }
 });
 
-
-// Funzione di inizializzazione
 const init = async () => {
     const { data: { session }, error } = await supabase.auth.getSession();
     if (error || !session) {
