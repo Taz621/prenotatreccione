@@ -5,20 +5,35 @@ const bookingsList = document.getElementById('bookings-list');
 let currentUser = null;
 let isAdmin = false;
 
-// ... (tutte le altre funzioni come formatDate, fetchBookings, deleteBooking rimangono invariate) ...
 const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('it-IT', options);
+    // Aggiungiamo 'T00:00:00' per evitare che il fuso orario cambi il giorno durante la formattazione
+    return new Date(dateString + 'T00:00:00').toLocaleDateString('it-IT', options);
 };
+
 const fetchBookings = async () => {
-    const { data: bookings, error } = await supabase.from('bookings').select('*').order('start_date', { ascending: true });
+    // --- QUESTA È LA PARTE MODIFICATA ---
+    // Creiamo la data di oggi in formato YYYY-MM-DD per il filtro
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const day = today.getDate().toString().padStart(2, '0');
+    const todayString = `${year}-${month}-${day}`;
+
+    // Aggiungiamo il filtro .gte('end_date', todayString) alla richiesta
+    const { data: bookings, error } = await supabase
+        .from('bookings')
+        .select('*')
+        .gte('end_date', todayString) // Filtra le prenotazioni la cui data di fine è oggi o futura
+        .order('start_date', { ascending: true });
+
     if (error) {
         console.error('Error fetching bookings:', error.message);
         bookingsList.innerHTML = '<p class="error">Impossibile caricare le prenotazioni.</p>';
         return;
     }
     if (bookings.length === 0) {
-        bookingsList.innerHTML = '<p>Nessuna prenotazione ancora effettuata. Sii il primo!</p>';
+        bookingsList.innerHTML = '<p>Nessuna prenotazione futura in programma.</p>';
         return;
     }
     bookingsList.innerHTML = '';
@@ -44,6 +59,7 @@ const fetchBookings = async () => {
         });
     });
 };
+
 const deleteBooking = async (id) => {
     const { error } = await supabase.from('bookings').delete().eq('id', id);
     if (error) {
@@ -55,8 +71,6 @@ const deleteBooking = async (id) => {
     }
 };
 
-
-// Funzione di inizializzazione
 const init = async () => {
     const { data: { session }, error } = await supabase.auth.getSession();
     if (error || !session) {
