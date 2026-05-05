@@ -60,7 +60,7 @@ nav {
 nav a {
     text-decoration: none; color: var(--text-color); font-weight: 600; padding: 0.5rem 1rem;
     border-radius: 8px; transition: background-color 0.3s, color 0.3s; font-size: 1rem;
-    flex-grow: 1; text-align: center;
+    flex: 1 1 0; text-align: center;
 }
 nav a.active { background-color: var(--secondary-color); color: var(--primary-color); }
 nav a:hover { background-color: var(--secondary-color); }
@@ -120,7 +120,7 @@ main {
 #book-btn { width: 100%; max-width: 300px; }
 
 /* Stili per il Logo */
-.logo-container { text-align: center; margin-bottom: 0; }
+.logo-container { text-align: center; margin-bottom: 2rem; }
 .logo { max-width: 250px; height: auto; }
 .logo-dark { display: none; }
 html.dark-mode .logo-dark { display: inline-block; }
