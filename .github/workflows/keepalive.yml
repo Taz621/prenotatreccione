@@ -1,0 +1,18 @@
+name: Supabase Keep Alive
+
+on:
+  schedule:
+    # Esegue automaticamente questo script ogni giorno alle 12:00 UTC (14:00 in Italia)
+    - cron: '0 12 * * *'
+  # Permette di eseguire lo script anche manualmente dal sito di GitHub
+  workflow_dispatch: 
+
+jobs:
+  ping-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase per mantenerlo attivo
+        run: |
+          curl -X GET "https://mdyjpcjmfthjylaoxapc.supabase.co/rest/v1/bookings?select=id&limit=1" \
+          -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1keWpwY2ptZnRoanlsYW94YXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY5MDk3MTUsImV4cCI6MjA3MjQ4NTcxNX0.je-dVMivgrPtRAwFnZRzb2hLmD1hWYV_PF1bbaasFZ4" \
+          -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1keWpwY2ptZnRoanlsYW94YXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY5MDk3MTUsImV4cCI6MjA3MjQ4NTcxNX0.je-dVMivgrPtRAwFnZRzb2hLmD1hWYV_PF1bbaasFZ4"
