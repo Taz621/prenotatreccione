@@ -14,6 +14,22 @@ const showLoginLink = document.getElementById('show-login');
 // Messaggi di errore
 const errorMessage = document.getElementById('error-message');
 
+// Toggle Password Visibility
+const togglePasswordVisibility = (toggleBtnId, inputId) => {
+    const toggleBtn = document.getElementById(toggleBtnId);
+    const input = document.getElementById(inputId);
+    if (toggleBtn && input) {
+        toggleBtn.addEventListener('click', () => {
+            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+            input.setAttribute('type', type);
+            // Non cambiamo l'icona dell'occhiolino come da richiesta, ma si potrebbe fare
+        });
+    }
+};
+
+togglePasswordVisibility('toggle-login-password', 'login-password');
+togglePasswordVisibility('toggle-signup-password', 'signup-password');
+
 // Controlla se l'utente è già loggato
 const checkUser = async () => {
     const { data: { session } } = await supabase.auth.getSession();
@@ -54,6 +70,8 @@ loginForm.addEventListener('submit', async (event) => {
         errorMessage.textContent = 'Credenziali non valide. Riprova.';
         console.error('Login Error:', error.message);
     } else {
+        let totalLogins = parseInt(localStorage.getItem('total_logins') || '0');
+        localStorage.setItem('total_logins', totalLogins + 1);
         window.location.href = 'home/panoramica.html';
     }
 });

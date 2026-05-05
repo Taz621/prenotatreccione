@@ -17,7 +17,10 @@
             <p>Accedi per prenotare il tuo soggiorno.</p>
             <form id="login-form">
                 <input type="email" id="login-email" placeholder="Email" required>
-                <input type="password" id="login-password" placeholder="Password" required>
+                <div class="password-wrapper">
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <span class="toggle-password" id="toggle-login-password">👁️</span>
+                </div>
                 <button type="submit" class="btn-primary">Accedi</button>
             </form>
             <p class="toggle-link">Sei nuovo? <a href="#" id="show-signup">Registrati qui</a></p>
@@ -27,7 +30,10 @@
             <p>Crea un nuovo account per iniziare.</p>
             <form id="signup-form">
                 <input type="email" id="signup-email" placeholder="Email" required>
-                <input type="password" id="signup-password" placeholder="Password (min. 6 caratteri)" required>
+                <div class="password-wrapper">
+                    <input type="password" id="signup-password" placeholder="Password (min. 6 caratteri)" required>
+                    <span class="toggle-password" id="toggle-signup-password">👁️</span>
+                </div>
                 <button type="submit" class="btn-primary">Registrati</button>
             </form>
             <p class="toggle-link">Hai già un account? <a href="#" id="show-login">Accedi</a></p>

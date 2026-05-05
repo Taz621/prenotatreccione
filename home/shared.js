@@ -37,6 +37,53 @@ logoutButton.addEventListener('click', async () => {
         // Possiamo mostrare un messaggio, ma non blocca l'uscita
     }
     
-    // Reindirizza sempre e comunque alla pagina di accesso
+// Reindirizza sempre e comunque alla pagina di accesso
     window.location.href = '../index.html';
 });
+
+// --- GESTIONE ANALYTICS ---
+const analyticsBtn = document.getElementById('analytics-btn');
+const analyticsDropdown = document.getElementById('analytics-dropdown');
+const totalLoginsSpan = document.getElementById('total-logins');
+const totalBookingsSpan = document.getElementById('total-bookings');
+
+if (analyticsBtn && analyticsDropdown) {
+    analyticsBtn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const isHidden = analyticsDropdown.classList.contains('hidden');
+        
+        if (isHidden) {
+            // Mostra il dropdown
+            analyticsDropdown.classList.remove('hidden');
+            
+            // 1. Leggi accessi totali
+            const logins = localStorage.getItem('total_logins') || '0';
+            totalLoginsSpan.textContent = logins;
+            
+            // 2. Fetch prenotazioni totali
+            totalBookingsSpan.textContent = '...';
+            try {
+                const { count, error } = await supabase
+                    .from('bookings')
+                    .select('*', { count: 'exact', head: true });
+                
+                if (error) throw error;
+                totalBookingsSpan.textContent = count !== null ? count : '0';
+            } catch (err) {
+                console.error('Errore nel caricamento delle prenotazioni:', err.message);
+                totalBookingsSpan.textContent = 'Errore';
+            }
+        } else {
+            // Nascondi
+            analyticsDropdown.classList.add('hidden');
+        }
+    });
+
+    // Chiudi il menu se si clicca fuori
+    document.addEventListener('click', (e) => {
+        if (!analyticsBtn.contains(e.target) && !analyticsDropdown.contains(e.target)) {
+            analyticsDropdown.classList.add('hidden');
+        }
+    });
+}
+
